@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="jQuery UI Date Range Picker Widget">
+    <meta name="author" content="Tamble">
+
+    <title>jQuery UI Date Range Picker Widget</title>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="prettify/prettify.css">
+    <link rel="stylesheet" href="daterangepicker/jquery.comiseo.daterangepicker.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/respond/1.4.2/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
+    <link href="respond/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+    <script src="respond/respond.proxy.js"></script>
+    <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.3.1/moment.min.js"></script>
+    <script src="daterangepicker/jquery.comiseo.daterangepicker.js"></script>
+</head>
+
+<body role="document">
+
+    <a href="https://github.com/tamble/jquery-ui-daterangepicker"><img class="hidden-xs" style="position: absolute; top: 0; right: 0; border: 0; z-index: 2000" src="//s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt=""></a>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DateRangePicker</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#basics">Basics</a></li>
+                <li><a href="#multimonth">Multiple Months</a></li>
+                <li><a href="#placeholders">Placeholders</a></li>
+                <li><a href="#presets">Custom Preset Ranges</a></li>
+                <li><a href="#programmatic">Programmatic control</a></li>
+                <li><a href="#lifecycle">Lifecycle</a></li>
+                <li><a href="#events">Events</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">API <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#options">Options</a></li>
+                <li><a href="#methods">Methods</a></li>
+                <li><a href="#event">Events</a></li>
+              </ul>
+            </li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container" role="main">
+
+        <div class="jumbotron">
+            <h1>jQuery UI DateRangePicker</h1>
+            <p>A jQuery UI widget similar to the date range picker used in Google Analytics;
+               supports multiple months, custom preset ranges and smart positioning;
+               <a href="http://jqueryui.com/themeroller/" title="jQuery UI ThemeRoller">ThemeRoller</a>-ready and mobile-friendly.
+            </p>
+            <ul class="list-inline">
+                <li>
+                    <a href="https://github.com/tamble/jquery-ui-daterangepicker" class="btn btn-primary" role="button">Learn more on GitHub &raquo;</a>
+                </li>
+                <li>
+                    <a href="https://github.com/tamble/jquery-ui-daterangepicker/tags" class="btn btn-success" role="button">Download &raquo;</a>
+                </li>
+                <li>
+                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=watch&count=true&size=large"
+                            allowtransparency="true" frameborder="0" scrolling="0" width="125" height="30"></iframe>
+                </li>
+                <li>
+                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=fork&count=true&size=large"
+                            allowtransparency="true" frameborder="0" scrolling="0" width="125" height="30"></iframe>
+                </li>
+                <li>
+                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=follow&count=true&size=large"
+                            allowtransparency="true" frameborder="0" scrolling="0" width="215" height="30"></iframe>
+                </li>
+            </ul>
+        </div>
+
+        <section>
+			<h2 class="page-header">
+				<a id="examples" class="tgt">Examples</a>
+			</h2>
+
+			<article class="row">
+				<script id="script_e1">
+				    $(function() {
+				        $("#e1").daterangepicker();
+				    });
+				</script>
+				<div class="col-md-4">
+					<h3>
+						<a id="basics" class="tgt">The Basics</a>
+					</h3>
+					<p>DateRangePicker can take a regular input element like this:</p>
+					<p>
+						<input class="raw">
+					</p>
+					<p>and turn it into:</p>
+					<p>
+						<input class="raw" id="e1">
+					</p>
+				</div>
+				<div class="col-md-8">
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e1">
+&lt;head&gt;
+    &lt;link href=&quot;jquery-ui.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;link href=&quot;jquery.comiseo.daterangepicker.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;jquery-ui.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;jquery.comiseo.daterangepicker.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        $(function() { $(&quot;#e1&quot;).daterangepicker(); });
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input id=&quot;e1&quot; name=&quot;e1&quot;&gt;
+&lt;/body&gt;
+</pre>
+				</div>
+			</article>
+
+			<article class="row">
+				<div class="col-md-4">
+					<h3>
+						<a id="multimonth" class="tgt">Multiple Months</a>
+					</h3>
+					<p>You can specify the number of months shown (the default is
+						3):</p>
+					<p>
+						<input class="raw" id="e2">
+					</p>
+				</div>
+				<div class="col-md-8">
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e2"></pre>
+				</div>
+				<script id="script_e2">
+				    $(function() {
+				        $("#e2").daterangepicker({
+				            datepickerOptions : {
+				                numberOfMonths : 2
+				            }
+				        });
+				    });
+				</script>
+			</article>
+
+			<article class="row">
+				<div class="col-md-4">
+					<h3>
+						<a id="placeholders" class="tgt">Placeholders</a>
+					</h3>
+					<p>A placeholder value is defined and will be displayed until a
+						selection is made:</p>
+					<p>
+						<input class="raw" id="e3">
+					</p>
+					<br>
+					<br>
+				</div>
+				<div class="col-md-8">
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e3"></pre>
+				</div>
+				<script id="script_e3">
+				    $(function() {
+				        $("#e3").daterangepicker({
+				            initialText : 'Select period...'
+				        });
+				    });
+				</script>
+			</article>
+
+			<article class="row">
+				<div class="col-md-4">
+					<h3>
+						<a id="presets" class="tgt">Custom Preset Ranges</a>
+					</h3>
+					<p>
+						DateRangePicker supports custom preset ranges to serve your needs
+						(<i>eg</i> date ranges in the future):
+					</p>
+					<p>
+						<input class="raw" id="e4">
+					</p>
+				</div>
+				<div class="col-md-8">
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e4"></pre>
+				</div>
+				<script id="script_e4">
+					$(function() {
+					    $("#e4").daterangepicker({
+					        presetRanges: [{
+					            text: 'Today',
+					            dateStart: function() { return moment() },
+					            dateEnd: function() { return moment() }
+					        }, {
+					            text: 'Tomorrow',
+					            dateStart: function() { return moment().add('days', 1) },
+					            dateEnd: function() { return moment().add('days', 1) }
+					        }, {
+					            text: 'Next 7 Days',
+					            dateStart: function() { return moment() },
+					            dateEnd: function() { return moment().add('days', 6) }
+					        }, {
+					            text: 'Next Week',
+					            dateStart: function() { return moment().add('weeks', 1).startOf('week') },
+					            dateEnd: function() { return moment().add('weeks', 1).endOf('week') }
+					        }],
+					        applyOnMenuSelect: false,
+					        datepickerOptions: {
+					            minDate: 0,
+					            maxDate: null
+					        }
+					    });
+					});
+				</script>
+			</article>
+
+			<article class="row">
+				<div class="col-md-4">
+					<h3>
+						<a id="programmatic" class="tgt">Programmatic Control</a>
+					</h3>
+					<p>DateRangePicker supports methods that allow programmatic
+						control of the component:</p>
+					<p>
+						<input type="button" class="btn btn-primary" id="e5_get" value="Alert selected range">
+						<input type="button" class="btn btn-primary" id="e5_gets" value="Alert input value">
+						<input type="button" class="btn btn-info" id="e5_set" value="Set to Yesterday">
+						<input type="button" class="btn btn-info" id="e5_cl" value="Clear">
+						<input type="button" class="btn btn-warning" id="e5_open" value="Open">
+						<input type="button" class="btn btn-warning" id="e5_close" value="Close">
+					</p>
+					<p>
+						<input class="raw" id="e5">
+					</p>
+				</div>
+				<div class="col-md-8">
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e5"></pre>
+				</div>
+				<script id="script_e5">
+					$(function() {
+					    $("#e5").daterangepicker();
+					    $("#e5_get").click(function () {
+					        alert("Selected range is: " + JSON.stringify($("#e5").daterangepicker("getRange")));
+					    });
+					    $("#e5_gets").click(function () { alert("Input value is: " + $("#e5").val());});
+					    $("#e5_set").click(function () {
+					        var yesterday = moment().subtract('days', 1).startOf('day').toDate();
+					        $("#e5").daterangepicker("setRange", {start: yesterday});
+					    });
+					    $("#e5_cl").click(function() { $("#e5").daterangepicker("clearRange"); });
+					    $("#e5_open").click(function () { $("#e5").daterangepicker("open"); });
+					    $("#e5_close").click(function () { $("#e5").daterangepicker("close"); });
+					});
+				</script>
+			</article>
+
+			<article class="row">
+				<div class="col-md-4">
+					<h3>
+						<a id="lifecycle" class="tgt">Lifecycle</a>
+					</h3>
+					<p>
+						<input class="raw" id="e6"><br>
+					</p>
+					<p>
+						<input type="button" id="e6_init" class="btn btn-primary" value="Init">
+						<input type="button" id="e6_destroy" class="btn btn-warning" value="Destroy">
+					</p>
+				</div>
+				<div class="col-md-8">
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e6"></pre>
+				</div>
+				<script id="script_e6">
+				    $(document).ready(function() {
+				        $("#e6").daterangepicker();
+				        $("#e6_init").click(function() {
+				            $("#e6").daterangepicker();
+				        });
+				        $("#e6_destroy").click(function() {
+				            $("#e6").daterangepicker("destroy");
+				        });
+				    });
+				</script>
+			</article>
+
+			<article class="row">
+				<div class="col-md-4">
+					<h3>
+						<a id="events" class="tgt">Events</a>
+					</h3>
+					<p>
+						<code>change</code>
+						event is triggered on the original element whenever its value is
+						changed by the user.
+					</p>
+					<p>
+						Callbacks are provided for the
+						<code>change</code>, <code>open</code> and <code>close</code>
+						events.
+					</p>
+					<p>
+						<input class="raw" id="e7">
+					</p>
+					<br>
+					<br>
+				</div>
+				<div class="col-md-8">
+					<h3>Event Log</h3>
+					<ul id="event_log"></ul>
+					<h3>Example Code</h3>
+					<pre class="prettyprint linenums" id="code_e7"></pre>
+				</div>
+				<script id="script_e7">
+					$(function() {
+					    function log(e) {
+					        $("#event_log").append($("<li>"+e+"</li>"));
+					    }
+					    $("#e7").daterangepicker({
+					        onOpen: function() { log('open') },
+					        onClose: function() { log('close') },
+					        onChange: function() { log('change') }
+					    });
+					});
+				</script>
+			</article>
+		</section>
+
+		<section>
+			<h2 class="page-header">
+				<a id="api" class="tgt">API</a>
+			</h2>
+
+			<article class="row">
+				<div class="col-md-12">
+					<h3>
+						<a id="options" class="tgt">Options</a>
+					</h3>
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<tr>
+								<th>Option</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>presetRanges</td>
+								<td>array</td>
+								<td><i>see source</i></td>
+								<td>
+									<p>Array of objects. Each object describes an item in the
+										presets menu and must have the following properties:</p>
+									<table class="table table-bordered table-striped">
+										<tr>
+											<th>Property</th>
+											<th>Type</th>
+											<th>Description</th>
+										</tr>
+										<tr>
+											<td>text</td>
+											<td>string</td>
+											<td>the label of the menu option.</td>
+										</tr>
+										<tr>
+											<td>dateStart</td>
+											<td>function returning a moment</td>
+											<td>the start of the preset date range</td>
+										</tr>
+										<tr>
+											<td>dateEnd</td>
+											<td>function returning a moment</td>
+											<td>the end of the preset date range</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>verticalOffset</td>
+								<td>int</td>
+								<td><code>0</code></td>
+								<td>Vertical offset of the dropdown (measured from just
+									below/above the trigger button). Useful for custom borders.</td>
+							</tr>
+							<tr>
+								<td>initialText</td>
+								<td>string</td>
+								<td><code>'Select date range...'</code></td>
+								<td>Placeholder text - shown when no date range is
+									selected.</td>
+							</tr>
+							<tr>
+								<td>icon</td>
+								<td>string</td>
+								<td><code>'ui-icon-triangle-1-s'</code></td>
+								<td>CSS class of the icon shown inside the trigger button.</td>
+							</tr>
+							<tr>
+								<td>applyButtonText</td>
+								<td>string</td>
+								<td><code>'Apply'</code></td>
+								<td>Label of the Apply button.</td>
+							</tr>
+							<tr>
+								<td>cancelButtonText</td>
+								<td>string</td>
+								<td><code>'Cancel'</code></td>
+								<td>Label of the Cancel button.</td>
+							</tr>
+							<tr>
+								<td>rangeSplitter</td>
+								<td>string</td>
+								<td><code>' - '</code></td>
+								<td>String used between the start and end dates.</td>
+							</tr>
+							<tr>
+								<td>dateFormat</td>
+								<td>string</td>
+								<td><code>'M d, yy'</code></td>
+								<td>Displayed date format. See <a
+									href="http://api.jqueryui.com/datepicker/#utility-formatDate">available
+										formats</a>.
+								</td>
+							</tr>
+							<tr>
+								<td>altFormat</td>
+								<td>string</td>
+								<td><code>'yy-mm-dd'</code></td>
+								<td>Submitted date format - used inside JSON <code>{
+										"start": "...", "end": "..." }</code>.
+								</td>
+							</tr>
+							<tr>
+								<td>mirrorOnCollision</td>
+								<td>boolean</td>
+								<td><code>true</code></td>
+								<td>Use a mirrored layout (calendar followed by presets menu) when there is
+									not enough space on the right and the dropdown opens to the left.</td>
+							</tr>
+							<tr>
+								<td>applyOnMenuSelect</td>
+								<td>boolean</td>
+								<td><code>true</code></td>
+								<td>Use auto-apply when a preset date range is selected from the menu.</td>
+							</tr>
+							<tr>
+								<td>datepickerOptions</td>
+								<td>object</td>
+								<td><i>see source</i></td>
+								<td>Object containing the options used to initialize the
+									jQuery UI datepicker widget. See <a
+									href="http://api.jqueryui.com/datepicker/#options">all
+										available options</a>.
+								</td>
+							</tr>
+							<tr>
+								<td>autoFitCalendars</td>
+								<td>boolean</td>
+								<td><code>true</code></td>
+								<td>Override the <code>numberOfMonths</code> from <code>datepickerOptions</code>
+									in order to fit widget width inside the viewport.
+								</td>
+							</tr>
+							<tr>
+								<td>onOpen</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td>Callback that executes when the dropdown opens.</td>
+							</tr>
+							<tr>
+								<td>onClose</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td>Callback that executes when the dropdown closes.</td>
+							</tr>
+							<tr>
+								<td>onChange</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td>Callback that executes when the date range changes.</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</article>
+
+			<article class="row">
+				<div class="col-md-12">
+					<h3>
+						<a id="methods" class="tgt">Methods</a>
+					</h3>
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<tr>
+								<th>Option</th>
+								<th>Return Type</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>open()</td>
+								<td>jQuery&nbsp;(plugin&nbsp;only)</td>
+								<td>Opens the dropdown.</td>
+							</tr>
+							<tr>
+								<td>close()</td>
+								<td>jQuery (plugin only)</td>
+								<td>Closes the dropdown.</td>
+							</tr>
+							<tr>
+								<td>setRange(range)</td>
+								<td>jQuery (plugin only)</td>
+								<td>
+									<p>Sets the selected date range.</p>
+									<table class="table table-bordered table-striped">
+										<tr>
+											<th>Parameter</th>
+											<th>Type</th>
+											<th>Description</th>
+										</tr>
+										<tr>
+											<td>range</td>
+											<td>Object</td>
+											<td><p>the date range.</p>
+												<table class="table table-bordered table-striped">
+													<tr>
+														<th>Property</th>
+														<th>Type</th>
+														<th>Description</th>
+													</tr>
+													<tr>
+														<td>start</td>
+														<td>Date</td>
+														<td>start of date range.</td>
+													</tr>
+													<tr>
+														<td>end</td>
+														<td>Date</td>
+														<td>end of date range; <i>optional</i> - <code>start</code>
+															is used by default.
+														</td>
+													</tr>
+												</table>
+												<p class="alert alert-warning">Always use start-of-day
+													for any Date values.</p></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>getRange()</td>
+								<td>Object</td>
+								<td>Gets the selected date range (the object has the same
+									properties as above).</td>
+							</tr>
+							<tr>
+								<td>clearRange()</td>
+								<td>jQuery (plugin only)</td>
+								<td>Clears the selected date range.</td>
+							</tr>
+							<tr>
+								<td>destroy()</td>
+								<td>jQuery (plugin only)</td>
+								<td>Removes the date range picker functionality completely.
+									This will return the element back to its pre-init state,
+									preserving any selected date range.</td>
+							</tr>
+							<tr>
+								<td>widget()</td>
+								<td>jQuery</td>
+								<td>Returns a <code>jQuery</code> object containing the
+									dropdown.
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</article>
+
+			<article class="row">
+				<div class="col-md-12">
+					<h3>
+						<a id="event" class="tgt">Events</a>
+					</h3>
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped">
+							<tr>
+								<th>Event</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>change</td>
+								<td>Fired when the selected date range is changed.</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</article>
+		</section>
+
+		<section>
+			<h2 class="page-header">
+				<a id="about" class="tgt">About</a>
+			</h2>
+			<ul>
+				<li><a
+					href="https://github.com/tamble/jquery-ui-daterangepicker">Project Site</a></li>
+				<li><a
+					href="https://github.com/tamble/jquery-ui-daterangepicker/issues">Bug Tracker</a></li>
+				<li><a
+					href="https://github.com/tamble/jquery-ui-daterangepicker/wiki">Wiki</a></li>
+			</ul>
+		</section>
+
+		<footer>
+			<p>
+				DateRangePicker is released under <a
+					href="https://raw.github.com/tamble/jquery-ui-daterangepicker/master/LICENSE.txt">the MIT license</a>.
+					Copyright (c) 2014 Tamble, Inc.
+			</p>
+		</footer>
+
+	</div> <!-- /container -->
+
+    <script src="https://cdn.jsdelivr.net/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="assets/js/setup.js"></script>
+    <script src="prettify/prettify.min.js"></script>
+</body>
+</html>

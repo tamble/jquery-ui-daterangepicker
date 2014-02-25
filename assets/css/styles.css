@@ -1,0 +1,89 @@
+body {
+	padding-top: 70px;
+	padding-bottom: 30px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	/* work-around Chrome bug #242101 */
+	html,body {
+		height: 100%;
+		overflow: auto
+	}
+	/* side-effects: breaks Scrollspy, FM covers scrollbar */
+}
+
+.tgt {
+	padding-top: 70px;
+	color: inherit;
+}
+
+.tgt:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+.ui-widget,.ui-widget *,.ui-widget *:before,.ui-widget *:after {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+a:focus {
+	outline: 0;
+}
+
+.btn {
+	padding: 4px 12px;
+}
+
+@media screen and (min-width: 768px) {
+	.jumbotron {
+		padding: 30px;
+	}
+	.jumbotron h1 {
+		font-size: 36px;
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.jumbotron h1 {
+		font-size: 60px;
+		letter-spacing: -1px;
+	}
+}
+
+.jumbotron p {
+	font-size: 18px;
+}
+
+.list-inline iframe {
+	vertical-align: middle;
+}
+
+.btn,.list-inline iframe {
+	margin: 5px 0;
+}
+
+.ui-widget {
+	font-size: 14px;
+}
+
+ol.linenums {
+	padding: 0;
+}
+
+article+article {
+	border-top: 1px solid #eee;
+}
+
+article {
+	margin-bottom: 10px;
+}
+
+input.raw {
+	width: 255px;
+	padding: 4px 6px;
+}
+.navbar-fixed-top {
+	z-index: 100;
+}
