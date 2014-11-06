@@ -1,0 +1,3 @@
+[submodule "daterangepicker-master"]
+	path = daterangepicker-master
+	url = https://github.com/tamble/jquery-ui-daterangepicker.git
