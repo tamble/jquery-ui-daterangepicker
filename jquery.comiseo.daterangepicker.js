@@ -14,7 +14,7 @@
 	var uniqueId = 0; // used for unique ID generation within multiple plugin instances
 
 	$.widget('comiseo.daterangepicker', {
-		version: '0.3.2',
+		version: '0.3.3',
 
 		options: {
 			// presetRanges: array of objects; each object describes an item in the presets menu
@@ -121,7 +121,7 @@
 		}
 
 		function reset() {
-			$originalElement.val({start: null, end: null}).change();
+			$originalElement.val('').change();
 			setLabel(options.initialText);
 		}
 
