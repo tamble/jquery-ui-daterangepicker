@@ -4,93 +4,145 @@
  */
 
 .comiseo-daterangepicker-triggerbutton.ui-button {
-	text-align: left;
-	min-width: 18em;
+    text-align: left;
+    min-width: 18em;
+}
+
+.comiseo-daterangepicker-triggerbutton span.textCompare {
+    font-size: 10px;
 }
 
 .comiseo-daterangepicker {
-	position: absolute;
-	padding: 5px;
+    position: absolute;
+    padding: 5px;
 }
 
 .comiseo-daterangepicker-mask {
-	margin: 0;
-	padding: 0;
-	position: fixed;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	/* required for IE */
-	background-color: #fff;
-	opacity: 0;
-	filter: alpha(opacity = 0);
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    /* required for IE */
+    background-color: #fff;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+}
+
+.comiseo-daterangepicker-GA input[type=text] {
+    width: 80px;
+}
+
+.comiseo-daterangepicker-GA input[type=checkbox] {
+    width: 20px;
+}
+
+.comiseo-daterangepicker-GA .thirdBlock {
+    display:none;
+}
+
+.comiseo-daterangepicker-GA #secondSelect:disabled {
+    color: #aaa;
+}
+
+.comiseo-daterangepicker-GA {
+    padding-top: 5px;
+}
+table.ui-datepicker-calendar td.blue a {
+    background: #0077cc !important;
+}
+
+table.ui-datepicker-calendar td.green a {
+    background: #00b1ab !important;
+}
+
+table.ui-datepicker-calendar td.orange a {
+    background: #ed7e17 !important;
+}
+
+table.ui-datepicker-calendar td.blue a, table.ui-datepicker-calendar td.green a, table.ui-datepicker-calendar td.orange a {
+    color: white;
+}
+.comiseo-daterangepicker-GA input.active1 {
+    border: #0077cc solid 3px;
+}
+
+.comiseo-daterangepicker-GA input.active2 {
+    border: #ed7e17 solid 3px;
+}
+
+.comiseo-daterangepicker-GA .secondBlock, .comiseo-daterangepicker-GA .thirdBlock, .comiseo-daterangepicker-GA {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .comiseo-daterangepicker-presets,
-.comiseo-daterangepicker-calendar {
-	display: table-cell;
-	vertical-align: top;
-	height: 230px;
+.comiseo-daterangepicker-calendar,
+.comiseo-daterangepicker-GA {
+    display: table-cell;
+    vertical-align: top;
+    height: 230px;
 }
 
 .comiseo-daterangepicker-right .comiseo-daterangepicker-presets {
-	padding: 2px 7px 7px 2px;
+    padding: 2px 7px 7px 2px;
 }
 
 .comiseo-daterangepicker-left .comiseo-daterangepicker-presets {
-	padding: 2px 2px 7px 7px;
+    padding: 2px 2px 7px 7px;
 }
 
 .ui-menu {
-	white-space: nowrap;
+    white-space: nowrap;
 }
 
 .comiseo-daterangepicker .ui-widget-content,
 .comiseo-daterangepicker .ui-datepicker .ui-state-highlight {
-	border-width: 0;
+    border-width: 0;
 }
 
 .comiseo-daterangepicker > .comiseo-daterangepicker-main.ui-widget-content {
-	border-bottom-width: 1px;
+    border-bottom-width: 1px;
 }
 
 .comiseo-daterangepicker .ui-datepicker .ui-datepicker-today .ui-state-highlight {
-	border-width: 1px;
+    border-width: 1px;
 }
 
 .comiseo-daterangepicker-right .comiseo-daterangepicker-calendar {
-	border-left-width: 1px;
-	padding-left: 5px;
+    border-left-width: 1px;
+    padding-left: 5px;
 }
 
 .comiseo-daterangepicker-left .comiseo-daterangepicker-calendar {
-	border-right-width: 1px;
-	padding-right: 5px;
+    border-right-width: 1px;
+    padding-right: 5px;
 }
 
 .comiseo-daterangepicker-right .comiseo-daterangepicker-buttonpanel {
-	float: left;
+    float: left;
 }
 
 .comiseo-daterangepicker-left .comiseo-daterangepicker-buttonpanel {
-	float: right;
+    float: right;
 }
 
 .comiseo-daterangepicker-buttonpanel > button  {
-	margin-top: 6px;
+    margin-top: 6px;
 }
 
 .comiseo-daterangepicker-right .comiseo-daterangepicker-buttonpanel > button {
-	margin-right: 6px;
+    margin-right: 6px;
 }
 
 .comiseo-daterangepicker-left .comiseo-daterangepicker-buttonpanel > button {
-	margin-left: 6px;
+    margin-left: 6px;
 }
 
 /* themeable styles */
 .comiseo-daterangepicker-calendar .ui-state-highlight a.ui-state-default {
-	background: #b0c4de;
-	color: #fff;
+    background: #b0c4de;
+    color: #fff;
 }
