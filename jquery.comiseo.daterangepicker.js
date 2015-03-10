@@ -1,6 +1,6 @@
 /*!
  * jQuery UI date range picker widget
- * Copyright (c) 2014 Tamble, Inc.
+ * Copyright (c) 2015 Tamble, Inc.
  * Licensed under MIT (https://github.com/tamble/jquery-ui-daterangepicker/raw/master/LICENSE.txt)
  *
  * Depends:
@@ -14,7 +14,7 @@
 	var uniqueId = 0; // used for unique ID generation within multiple plugin instances
 
 	$.widget('comiseo.daterangepicker', {
-		version: '0.3.4',
+		version: '0.3.5',
 
 		options: {
 			// presetRanges: array of objects; each object describes an item in the presets menu
@@ -202,8 +202,8 @@
 			} else {
 				range.end = selectedDate;
 			}
-			if (options.datepickerOptions.hasOwnProperty('onSelectDay')) {
-				options.datepickerOptions.onSelectDay(dateText, instance);
+			if (options.datepickerOptions.hasOwnProperty('onSelect')) {
+				options.datepickerOptions.onSelect(dateText, instance);
 			}
 		}
 
