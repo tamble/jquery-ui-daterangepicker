@@ -14,7 +14,7 @@
 	var uniqueId = 0; // used for unique ID generation within multiple plugin instances
 
 	$.widget('comiseo.daterangepicker', {
-		version: '0.4.0',
+		version: '0.4.1',
 
 		options: {
 			// presetRanges: array of objects; each object describes an item in the presets menu
@@ -57,6 +57,11 @@
 
 		_destroy: function() {
 			this._dateRangePicker.destroy();
+		},
+
+		_setOptions: function(options) {
+			this._super(options);
+			this._dateRangePicker.enforceOptions();
 		},
 
 		open: function() {
@@ -126,12 +131,22 @@
 			setLabel(options.initialText);
 		}
 
+		function enforceOptions() {
+			$self.button('option', {
+				icons: {
+					secondary: options.icon
+				},
+				label: options.initialText
+			});
+		}
+
 		init();
 		return {
 			getElement: function() { return $self; },
 			getLabel: getLabel,
 			setLabel: setLabel,
-			reset: reset
+			reset: reset,
+			enforceOptions: enforceOptions
 		};
 	}
 
@@ -187,6 +202,10 @@
 
 			$self.datepicker($.extend({}, options.datepickerOptions, {beforeShowDay: beforeShowDay, onSelect: onSelectDay}));
 			updateAtMidnight();
+		}
+
+		function enforceOptions() {
+			$self.datepicker('option', $.extend({}, options.datepickerOptions, {beforeShowDay: beforeShowDay, onSelect: onSelectDay}));
 		}
 
 		// called when a day is selected
@@ -255,7 +274,8 @@
 			getRange: function() { return range; },
 			setRange: function(value) { range = value; refresh(); },
 			refresh: refresh,
-			reset: reset
+			reset: reset,
+			enforceOptions: enforceOptions
 		};
 	}
 
@@ -292,6 +312,12 @@
 			bindEvents();
 		}
 
+		function enforceOptions() {
+			applyButton.button('option', 'label', options.applyButtonText);
+			clearButton.button('option', 'label', options.clearButtonText);
+			cancelButton.button('option', 'label', options.cancelButtonText);
+		}
+
 		function bindEvents() {
 			if (handlers) {
 				applyButton.click(handlers.onApply);
@@ -302,7 +328,8 @@
 
 		init();
 		return {
-			getElement: function() { return $self; }
+			getElement: function() { return $self; },
+			enforceOptions: enforceOptions
 		};
 	}
 
@@ -440,7 +467,7 @@
 		}
 
 		function reset() {
-			var range = parseRange($originalElement.val());
+			var range = getRange();
 			if (range) {
 				triggerButton.setLabel(formatRangeForDisplay(range));
 				calendar.setRange(range);
@@ -590,6 +617,19 @@
 			return $container;
 		}
 
+		function enforceOptions() {
+			var oldPresetsMenu = presetsMenu;
+			presetsMenu = buildPresetsMenu(classname, options, usePreset);
+			oldPresetsMenu.getElement().replaceWith(presetsMenu.getElement());
+			calendar.enforceOptions();
+			buttonPanel.enforceOptions();
+			triggerButton.enforceOptions();
+			var range = getRange();
+			if (range) {
+				triggerButton.setLabel(formatRangeForDisplay(range));
+			}
+		}
+
 		init();
 		return {
 			toggle: toggle,
@@ -600,6 +640,7 @@
 			getRange: getRange,
 			clearRange: clearRange,
 			reset: reset,
+			enforceOptions: enforceOptions,
 			getContainer: getContainer
 		};
 	}
