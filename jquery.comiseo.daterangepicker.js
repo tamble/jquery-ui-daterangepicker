@@ -14,7 +14,7 @@
 	var uniqueId = 0; // used for unique ID generation within multiple plugin instances
 
 	$.widget('comiseo.daterangepicker', {
-		version: '0.4.1',
+		version: '0.4.2',
 
 		options: {
 			// presetRanges: array of objects; each object describes an item in the presets menu
@@ -32,8 +32,8 @@
 			verticalOffset: 0,
 			initialText: 'Select date range...', // placeholder text - shown when nothing is selected
 			icon: 'ui-icon-triangle-1-s',
-			applyButtonText: 'Apply',
-			clearButtonText: 'Clear',
+            applyButtonText: 'Apply',
+            clearButtonText: 'Clear',
 			cancelButtonText: 'Cancel',
 			rangeSplitter: ' - ', // string to use between dates
 			dateFormat: 'M d, yy', // displayed date format. Available formats: http://api.jqueryui.com/datepicker/#utility-formatDate
@@ -293,36 +293,63 @@
 			cancelButton;
 
 		function init() {
-			applyButton = $('<button type="button" class="ui-priority-primary"></button>')
-				.text(options.applyButtonText)
-				.button();
-			clearButton = $('<button type="button" class="ui-priority-secondary"></button>')
-				.text(options.clearButtonText)
-				.button();
-			cancelButton = $('<button type="button" class="ui-priority-secondary"></button>')
-				.text(options.cancelButtonText)
-				.button();
+            $self = $('<div></div>')
+                .addClass(classnameContext + '-buttonpanel');
 
-			$self = $('<div></div>')
-				.addClass(classnameContext + '-buttonpanel')
-				.append(applyButton)
-				.append(clearButton)
-				.append(cancelButton);
+            if(options.applyButtonText) {
+                applyButton = $('<button type="button" class="ui-priority-primary"></button>')
+                    .text(options.applyButtonText)
+                    .button();
+
+                $self.append(applyButton);
+            }
+
+            if(options.clearButtonText) {
+                clearButton = $('<button type="button" class="ui-priority-secondary"></button>')
+                    .text(options.clearButtonText)
+                    .button();
+
+                $self.append(clearButton);
+            }
+
+            if(options.cancelButtonText) {
+                cancelButton = $('<button type="button" class="ui-priority-secondary"></button>')
+                    .text(options.cancelButtonText)
+                    .button();
+
+                $self.append(cancelButton);
+            }
 
 			bindEvents();
 		}
 
 		function enforceOptions() {
-			applyButton.button('option', 'label', options.applyButtonText);
-			clearButton.button('option', 'label', options.clearButtonText);
-			cancelButton.button('option', 'label', options.cancelButtonText);
+            if(applyButton) {
+                applyButton.button('option', 'label', options.applyButtonText);
+            }
+
+            if(clearButton) {
+                clearButton.button('option', 'label', options.clearButtonText);
+            }
+
+            if(cancelButton) {
+                cancelButton.button('option', 'label', options.cancelButtonText);
+            }
 		}
 
 		function bindEvents() {
 			if (handlers) {
-				applyButton.click(handlers.onApply);
-				clearButton.click(handlers.onClear);
-				cancelButton.click(handlers.onCancel);
+                if(applyButton){
+                    applyButton.click(handlers.onApply);
+                }
+
+                if(clearButton) {
+                    clearButton.click(handlers.onClear);
+                }
+
+                if(cancelButton) {
+                    cancelButton.click(handlers.onCancel);
+                }
 			}
 		}
 
