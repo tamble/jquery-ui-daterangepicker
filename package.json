@@ -3,27 +3,28 @@
   "version": "1.0.0",
   "description": "jQuery UI widget similar to the date range picker used in Google Analytics; supports multiple months, custom preset ranges and smart positioning; ThemeRoller-ready and mobile-friendly.",
   "main": "jquery.comiseo.daterangepicker.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tamble/jquery-ui-daterangepicker.git"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "jquery",
-    "jquery",
-    "ui",
-    "date",
-    "picker",
-    "date",
-    "range",
-    "picker"
+    "jquery ui",
+    "date picker",
+    "date range picker"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tamble/jquery-ui-daterangepicker/issues"
   },
-  "homepage": "https://github.com/tamble/jquery-ui-daterangepicker#readme"
+  "homepage": "https://github.com/tamble/jquery-ui-daterangepicker#readme",
+  "dependencies": {
+    "jquery": "~1.8.3",
+    "jquery-ui": "~1.9.0",
+    "momentjs": "~2.3.0"
+  }
 }
