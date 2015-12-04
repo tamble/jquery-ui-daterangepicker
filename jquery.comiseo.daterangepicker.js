@@ -44,6 +44,7 @@
 			onOpen: null, // callback that executes when the dropdown opens
 			onClose: null, // callback that executes when the dropdown closes
 			onChange: null, // callback that executes when the date range changes
+            onClear: null, // callback that executes when the clear button is used
 			datepickerOptions: { // object containing datepicker options. See http://api.jqueryui.com/datepicker/#options
 				numberOfMonths: 3,
 //				showCurrentAtPos: 1 // bug; use maxDate instead
@@ -527,6 +528,9 @@
 			triggerButton.reset();
 			calendar.reset();
 			$originalElement.val('');
+            if (options.onClear) {
+                options.onClear();
+            }
 		}
 
 		// callback - used when the user clicks a preset range
