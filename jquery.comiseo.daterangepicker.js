@@ -460,7 +460,10 @@
 		function bindEvents() {
 			triggerButton.getElement().click(toggle);
 			triggerButton.getElement().keydown(keyPressTriggerOpenOrClose);
-			$mask.click(close);
+			$mask.click(function() {
+				close();
+				reset();
+			});
 			$(window).resize(function() { isOpen ? autoFit() : autoFitNeeded = true; });
 		}
 
