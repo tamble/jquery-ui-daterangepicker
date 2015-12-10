@@ -461,7 +461,10 @@
 		function bindEvents() {
 			triggerButton.getElement().click(toggle);
 			triggerButton.getElement().keydown(keyPressTriggerOpenOrClose);
-			$mask.click(close);
+			$mask.click(function() {
+				close();
+				reset();
+			});
 			$(window).resize(function() { isOpen ? autoFit() : autoFitNeeded = true; });
 		}
 
@@ -606,6 +609,7 @@
 			case $.ui.keyCode.ESCAPE:
 				killEvent(event);
 				close();
+				reset();
 				return;
 			case $.ui.keyCode.TAB:
 				close();
@@ -641,7 +645,13 @@
 		}
 
 		function toggle() {
-			isOpen ? close() : open();
+			if(isOpen) {
+				close();
+				reset();
+			}
+			else {
+				open();
+			}
 		}
 
 		function getContainer(){
