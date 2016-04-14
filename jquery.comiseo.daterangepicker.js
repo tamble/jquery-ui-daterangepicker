@@ -260,7 +260,6 @@
 
 		function refresh() {
 			$self.datepicker('refresh');
-			$self.datepicker('setDate', null); // clear the selected date
 		}
 
 		function reset() {
