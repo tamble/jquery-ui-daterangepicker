@@ -234,14 +234,15 @@
 					true, // selectable
 					range.start && ((+date === +range.start) || (range.end && range.start <= date && date <= range.end)) ? 'ui-state-highlight' : '' // class to be added
 				],
-				userResult = [true, ''];
+				userResult = [true, '', null];
 
 			if (options.datepickerOptions.hasOwnProperty('beforeShowDay')) {
 				userResult = options.datepickerOptions.beforeShowDay(date);
 			}
 			return [
 					result[0] && userResult[0],
-					result[1] + ' ' + userResult[1]
+					result[1] + ' ' + userResult[1],
+					userResult[2]
 					];
 		}
 
