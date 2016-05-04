@@ -16,15 +16,6 @@
     <link rel="stylesheet" href="prettify/prettify.css">
     <link rel="stylesheet" href="daterangepicker-master/jquery.comiseo.daterangepicker.css">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.jsdelivr.net/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/respond/1.4.2/cross-domain/respond-proxy.html" id="respond-proxy" rel="respond-proxy">
-    <link href="respond/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
-    <script src="respond/respond.proxy.js"></script>
-    <![endif]-->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.3.1/moment.min.js"></script>
@@ -33,7 +24,9 @@
 
 <body role="document">
 
-    <a href="https://github.com/tamble/jquery-ui-daterangepicker"><img class="hidden-xs" style="position: absolute; top: 0; right: 0; border: 0; z-index: 2000" src="//s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt=""></a>
+    <a href="https://github.com/tamble/jquery-ui-daterangepicker"><img class="hidden-xs"
+       style="position: absolute; top: 0; right: 0; border: 0; z-index: 2000"
+       src="//s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt=""></a>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -90,7 +83,7 @@
                     <a href="https://github.com/tamble/jquery-ui-daterangepicker/tags" class="btn btn-success" role="button">Download &raquo;</a>
                 </li>
                 <li>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=watch&count=true&size=large"
+                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=star&count=true&size=large"
                             allowtransparency="true" frameborder="0" scrolling="0" width="125" height="30"></iframe>
                 </li>
                 <li>
@@ -98,7 +91,7 @@
                             allowtransparency="true" frameborder="0" scrolling="0" width="125" height="30"></iframe>
                 </li>
                 <li>
-                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=follow&count=true&size=large"
+                    <iframe src="http://ghbtns.com/github-btn.html?user=tamble&repo=jquery-ui-daterangepicker&type=watch&count=true&size=large&v=2"
                             allowtransparency="true" frameborder="0" scrolling="0" width="215" height="30"></iframe>
                 </li>
             </ul>
@@ -324,16 +317,11 @@
 					<h3>
 						<a id="events" class="tgt">Events</a>
 					</h3>
-					<p>
-						<code>change</code>
-						event is triggered on the original element whenever its value is
-						changed by the user.
-					</p>
-					<p>
-						Callbacks are provided for the
-						<code>change</code>, <code>open</code> and <code>close</code>
-						events.
-					</p>
+					<p><code>open</code> is triggered when the dropdown opens.</p>
+					<p><code>close</code> is triggered when the dropdown closes.</p>
+					<p><code>change</code> is triggered when the date range changes.</p>
+					<p><code>clear</code> is triggered when the clear button is used.</p>
+					<p><code>cancel</code> is triggered when the cancel button is used.</p>
 					<p>
 						<input class="raw" id="e7">
 					</p>
@@ -351,11 +339,17 @@
 					    function log(e) {
 					        $("#event_log").append($("<li>"+e+"</li>"));
 					    }
+					    // using callbacks
 					    $("#e7").daterangepicker({
-					        onOpen: function() { log('open') },
-					        onClose: function() { log('close') },
-					        onChange: function() { log('change') }
+					        open: function(event, data) { log('open') },
+					        change: function(event, data) { log('change') },
+					        clear: function(event, data) { log('clear') },
+					        cancel: function(event, data) { log('cancel') }
 					    });
+					    // using events
+					    $("#e7").on('daterangepickerclose', function(event, data) { log('close') });
+					    // a change event is also triggered on the original element
+					    $("#e7").on('change', function(event) { log('input element changed') });
 					});
 				</script>
 			</article>
@@ -409,13 +403,6 @@
 										</tr>
 									</table>
 								</td>
-							</tr>
-							<tr>
-								<td>verticalOffset</td>
-								<td>int</td>
-								<td><code>0</code></td>
-								<td>Vertical offset of the dropdown (measured from just
-									below/above the trigger button). Useful for custom borders.</td>
 							</tr>
 							<tr>
 								<td>initialText</td>
@@ -472,11 +459,26 @@
 								</td>
 							</tr>
 							<tr>
+								<td>verticalOffset</td>
+								<td>int</td>
+								<td><code>0</code></td>
+								<td>Vertical offset of the dropdown (measured from just
+									below/above the trigger button). Useful for custom borders.</td>
+							</tr>
+							<tr>
 								<td>mirrorOnCollision</td>
 								<td>boolean</td>
 								<td><code>true</code></td>
 								<td>Use a mirrored layout (calendar followed by presets menu) when there is
 									not enough space on the right and the dropdown opens to the left.</td>
+							</tr>
+							<tr>
+								<td>autoFitCalendars</td>
+								<td>boolean</td>
+								<td><code>true</code></td>
+								<td>Override the <code>numberOfMonths</code> from <code>datepickerOptions</code>
+									in order to fit widget width inside the viewport.
+								</td>
 							</tr>
 							<tr>
 								<td>applyOnMenuSelect</td>
@@ -495,30 +497,62 @@
 								</td>
 							</tr>
 							<tr>
-								<td>autoFitCalendars</td>
-								<td>boolean</td>
-								<td><code>true</code></td>
-								<td>Override the <code>numberOfMonths</code> from <code>datepickerOptions</code>
-									in order to fit widget width inside the viewport.
-								</td>
-							</tr>
-							<tr>
-								<td>onOpen</td>
+								<td>open</td>
 								<td>function</td>
 								<td><code>null</code></td>
 								<td>Callback that executes when the dropdown opens.</td>
 							</tr>
 							<tr>
-								<td>onClose</td>
+								<td>close</td>
 								<td>function</td>
 								<td><code>null</code></td>
 								<td>Callback that executes when the dropdown closes.</td>
 							</tr>
 							<tr>
-								<td>onChange</td>
+								<td>change</td>
 								<td>function</td>
 								<td><code>null</code></td>
 								<td>Callback that executes when the date range changes.</td>
+							</tr>
+							<tr>
+								<td>clear</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td>Callback that executes when the "Clear" button is used.</td>
+							</tr>
+							<tr>
+								<td>cancel</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td>Callback that executes when the "Cancel" button is used.</td>
+							</tr>
+							<tr>
+								<td>onOpen</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><span class="text-warning">deprecated</span>
+									Callback that executes when the dropdown opens.</td>
+							</tr>
+							<tr>
+								<td>onClose</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><span class="text-warning">deprecated</span>
+									Callback that executes when the dropdown closes.</td>
+							</tr>
+							<tr>
+								<td>onChange</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><span class="text-warning">deprecated</span>
+									Callback that executes when the date range changes.</td>
+							</tr>
+							<tr>
+								<td>onClear</td>
+								<td>function</td>
+								<td><code>null</code></td>
+								<td><span class="text-warning">deprecated</span>
+									Callback that executes when the clear button is used.</td>
 							</tr>
 						</table>
 					</div>
@@ -629,8 +663,24 @@
 								<th>Description</th>
 							</tr>
 							<tr>
+								<td>open</td>
+								<td>Fired when the dropdown opens.</td>
+							</tr>
+							<tr>
+								<td>close</td>
+								<td>Fired when the dropdown closes.</td>
+							</tr>
+							<tr>
 								<td>change</td>
 								<td>Fired when the selected date range is changed.</td>
+							</tr>
+							<tr>
+								<td>clear</td>
+								<td>Fired when the "Clear" button is used.</td>
+							</tr>
+							<tr>
+								<td>cancel</td>
+								<td>Fired when the "Cancel" button is used.</td>
 							</tr>
 						</table>
 					</div>
