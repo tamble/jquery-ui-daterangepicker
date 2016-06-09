@@ -40,7 +40,8 @@
 			verticalOffset: 0, // offset of the dropdown relative to the closest edge of the trigger button
 			mirrorOnCollision: true, // reverse layout when there is not enough space on the right
 			autoFitCalendars: true, // override datepicker's numberOfMonths option in order to fit widget width
-			applyOnMenuSelect: true, // whether to auto apply menu selections
+			applyOnMenuSelect: true, // whether to auto apply menu selections,
+			scrollToStartRangeOnPresetClick: false, // scroll calendar to start of preset range
 			open: null, // callback that executes when the dropdown opens
 			close: null, // callback that executes when the dropdown closes
 			change: null, // callback that executes when the date range changes
@@ -551,6 +552,11 @@
 				start = $this.data('dateStart')().startOf('day').toDate(),
 				end = $this.data('dateEnd')().startOf('day').toDate();
 			calendar.setRange({ start: start, end: end });
+			
+if (options.scrollToStartRangeOnPresetClick) {
+				calendar.scrollToRangeStart();
+			}
+			
 			if (options.applyOnMenuSelect) {
 				close(event);
 				setRange(null, event);
