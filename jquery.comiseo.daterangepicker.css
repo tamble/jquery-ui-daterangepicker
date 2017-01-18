@@ -1,11 +1,18 @@
 /*!
- * Copyright (c) 2014 Tamble, Inc.
+ * Copyright (c) 2017 Tamble, Inc.
  * Licensed under MIT (https://github.com/tamble/jquery-ui-daterangepicker/raw/master/LICENSE.txt)
  */
 
 .comiseo-daterangepicker-triggerbutton.ui-button {
 	text-align: left;
 	min-width: 18em;
+}
+
+.comiseo-daterangepicker-triggerbutton .ui-button-icon { /* fix v1.12 */
+	position: absolute;
+	right: 0.5em;
+	top: 50%;
+	margin-top: -8px;
 }
 
 .comiseo-daterangepicker {
@@ -42,8 +49,21 @@
 	padding: 2px 2px 7px 7px;
 }
 
-.ui-menu {
+.comiseo-daterangepicker-presets .ui-menu {
+	padding: 2px; /* fix v1.11 */
 	white-space: nowrap;
+}
+
+.comiseo-daterangepicker-presets .ui-menu-item { /* fix v1.11 */
+	padding: 0;
+}
+
+.comiseo-daterangepicker-presets .ui-menu-item > * { /* fix v1.11 */
+	text-decoration: none;
+	display: block;
+	padding: 2px 0.4em;
+	line-height: 1.5;
+	min-height: 0; /* support: IE7 */
 }
 
 .comiseo-daterangepicker .ui-widget-content,
