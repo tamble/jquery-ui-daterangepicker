@@ -1,6 +1,6 @@
 /*!
  * jQuery UI date range picker widget
- * Copyright (c) 2016 Tamble, Inc.
+ * Copyright (c) 2017 Tamble, Inc.
  * Licensed under MIT (https://github.com/tamble/jquery-ui-daterangepicker/raw/master/LICENSE.txt)
  *
  * Depends:
@@ -14,7 +14,7 @@
 	var uniqueId = 0; // used for unique ID generation within multiple plugin instances
 
 	$.widget('comiseo.daterangepicker', {
-		version: '0.5.0',
+		version: '0.6.0-beta.1',
 
 		options: {
 			// presetRanges: array of objects; each object describes an item in the presets menu
@@ -120,6 +120,8 @@
 					icons: {
 						secondary: options.icon
 					},
+					icon: options.icon,
+					iconPosition: 'end',
 					label: options.initialText
 				});
 		}
@@ -142,6 +144,8 @@
 				icons: {
 					secondary: options.icon
 				},
+				icon: options.icon,
+				iconPosition: 'end',
 				label: options.initialText
 			});
 		}
@@ -165,7 +169,8 @@
 	 */
 	function buildPresetsMenu(classnameContext, options, onClick) {
 		var $self,
-			$menu;
+			$menu,
+			menuItemWrapper;
 
 		function init() {
 			$self = $('<div></div>')
@@ -173,8 +178,14 @@
 
 			$menu = $('<ul></ul>');
 
+			if ($.ui.menu.prototype.options.items === undefined) {
+				menuItemWrapper = {start: '<li><a href="#">', end: '</a></li>'};
+			} else {
+				menuItemWrapper = {start: '<li><div>', end: '</div></li>'};
+			}
+
 			$.each(options.presetRanges, function() {
-				$('<li><a href="#">' + this.text + '</a></li>')
+				$(menuItemWrapper.start + this.text + menuItemWrapper.end)
 				.data('dateStart', this.dateStart)
 				.data('dateEnd', this.dateEnd)
 				.click(onClick)
