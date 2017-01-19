@@ -41,6 +41,7 @@
 			mirrorOnCollision: true, // reverse layout when there is not enough space on the right
 			autoFitCalendars: true, // override datepicker's numberOfMonths option in order to fit widget width
 			applyOnMenuSelect: true, // whether to auto apply menu selections
+			updateLabelWithPreset: false, // whether to update the label with the name of presets used
 			open: null, // callback that executes when the dropdown opens
 			close: null, // callback that executes when the dropdown closes
 			change: null, // callback that executes when the date range changes
@@ -188,6 +189,7 @@
 				$(menuItemWrapper.start + this.text + menuItemWrapper.end)
 				.data('dateStart', this.dateStart)
 				.data('dateEnd', this.dateEnd)
+				.data('text', this.text)
 				.click(onClick)
 				.appendTo($menu);
 			});
@@ -535,7 +537,19 @@
 				range.end = range.start;
 			}
 			value && calendar.setRange(range);
-			triggerButton.setLabel(formatRangeForDisplay(range));
+			var newLabel = formatRangeForDisplay(range);
+			if (options.updateLabelWithPreset) {
+				var sDate = moment(range.start).format('YYYY-MM-DD').toString();
+				var eDate = moment(range.end).format('YYYY-MM-DD').toString();
+				$.each(options.presetRanges, function() {
+					var sDateChk = this.dateStart().format('YYYY-MM-DD').toString();
+					var eDateChk = this.dateEnd().format('YYYY-MM-DD').toString();
+					if (sDate == sDateChk && eDate == eDateChk) {
+						newLabel = this.text.toString();
+					}
+				});
+			}
+			triggerButton.setLabel(newLabel);
 			$originalElement.val(formatRange(range)).change();
 			if (options.onChange) {
 				options.onChange();
