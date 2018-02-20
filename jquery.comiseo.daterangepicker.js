@@ -111,8 +111,16 @@
 				.attr('for', id);
 		}
 
+		function fixButton() {
+			if ($.fn.button.noConflict) {
+				var btn = $.fn.button.noConflict(); // reverts $.fn.button to jqueryui btn
+				$.fn.btn = btn; // assigns bootstrap button functionality to $.fn.btn
+			}
+		}
+		
 		function init() {
 			fixReferences();
+			fixButton();
 			$self = $('<button type="button"></button>')
 				.addClass(classnameContext + '-triggerbutton')
 				.attr({'title': $originalElement.attr('title'), 'tabindex': $originalElement.attr('tabindex'), id: id})
